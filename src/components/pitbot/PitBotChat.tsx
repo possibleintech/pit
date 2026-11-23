@@ -15,6 +15,7 @@ import {
   RotateCcw,
 } from "lucide-react";
 import { CONTACT, ROUTES } from "@/lib/constants";
+import { trackEvent } from "@/lib/analytics";
 import { PITBOT_CHAT_CONVERSATIONS } from "./pitBotMessages";
 
 interface MessageItem {
@@ -84,6 +85,7 @@ export function PitBotChat() {
   // Focus input and handle Escape key
   useEffect(() => {
     if (isOpen) {
+      trackEvent("chat_open", { source: "pitbot" });
       setShowWelcomeBubble(false);
       setTimeout(() => inputRef.current?.focus(), 250);
 

@@ -38,13 +38,6 @@ export const FOOTER_EXPLORE = [
   { label: "Contact Us", href: ROUTES.consultation },
 ] as const;
 
-export const FOOTER_COMPANY = [
-  { label: "About PIT", href: ROUTES.about },
-  { label: "Featured Work", href: ROUTES.projects },
-  { label: "All Services", href: ROUTES.services },
-  { label: "Book Consultation", href: ROUTES.consultation },
-] as const;
-
 /** Compact links shown on mobile */
 export const FOOTER_MOBILE_QUICK = [
   { label: "Services", href: ROUTES.services },

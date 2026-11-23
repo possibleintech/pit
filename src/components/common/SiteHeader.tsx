@@ -7,8 +7,10 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ArrowRight, MessageCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { ROUTES, NAV_LINKS, SITE, PUBLIC_ASSETS, CONTACT } from "@/lib/constants";
+import { ROUTES, NAV_LINKS, PUBLIC_ASSETS, CONTACT } from "@/lib/constants";
+import { trackEvent } from "@/lib/analytics";
 import { NavDropdown } from "@/components/common/NavDropdown";
+import { ContactPhoneList } from "@/components/common/ContactPhoneList";
 import type { NavChild } from "@/lib/constants/nav";
 
 function isNavActive(pathname: string, href: string, children?: readonly NavChild[]) {
@@ -116,18 +118,20 @@ export function SiteHeader() {
           {/* Desktop CTAs */}
           <div className="hidden lg:flex items-center gap-3 shrink-0">
             <a
-              href={`https://wa.me/${CONTACT.whatsapp.replace(/[^0-9]/g, "")}`}
+              href={CONTACT.whatsappLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#292D3D] hover:text-[#E20A96] px-4 py-2.5 rounded-full border border-[#E8E8ED] hover:border-[#E20A96]/30 hover:bg-[#FCEAF4]/50 transition-all"
+              onClick={() => trackEvent("whatsapp_click", { source: "header" })}
+              className="btn-outline inline-flex items-center gap-1.5 text-xs"
               aria-label="Chat on WhatsApp"
             >
-              <MessageCircle size={15} className="text-[#E20A96]" />
+              <MessageCircle size={15} className="text-magenta" />
               <span>WhatsApp</span>
             </a>
             <Link
               href={ROUTES.consultation}
-              className="inline-flex items-center gap-1.5 bg-[#E20A96] hover:bg-[#C40882] text-white text-xs sm:text-sm font-semibold px-6 py-3 rounded-full shadow-[0_4px_14px_rgba(226,10,150,0.26)] hover:shadow-[0_6px_20px_rgba(226,10,150,0.36)] hover:-translate-y-0.5 transition-all whitespace-nowrap"
+              onClick={() => trackEvent("cta_click", { source: "header" })}
+              className="btn-primary inline-flex items-center gap-1.5 text-xs sm:text-sm whitespace-nowrap"
             >
               <span>Let&apos;s Talk</span>
               <ArrowRight size={15} />
@@ -174,24 +178,16 @@ export function SiteHeader() {
             {NAV_LINKS.map((link) => renderNavItem(link, true))}
           </div>
 
-          <div className="pt-3 border-t border-[#E8E8ED] flex flex-col gap-2.5">
+          <div className="flex flex-col gap-3 border-t border-pit pt-3">
             <Link
               href={ROUTES.consultation}
               onNavigate={closeMobile}
-              className="w-full justify-center inline-flex items-center gap-2 bg-[#E20A96] hover:bg-[#C40882] text-white text-sm font-semibold py-3 rounded-full shadow-[0_4px_14px_rgba(226,10,150,0.24)] text-center transition-all"
+              className="btn-primary inline-flex w-full items-center justify-center gap-2 text-sm"
             >
               <span>Let&apos;s Talk</span>
               <ArrowRight size={14} />
             </Link>
-            <a
-              href={`https://wa.me/${CONTACT.whatsapp.replace(/[^0-9]/g, "")}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="w-full justify-center inline-flex items-center gap-2 border border-[#E8E8ED] hover:border-[#E20A96] text-[#292D3D] hover:text-[#E20A96] bg-[#F7F7FA] text-xs font-semibold py-2.5 rounded-full transition-all text-center"
-            >
-              <MessageCircle size={15} className="text-[#E20A96]" />
-              <span>Quick WhatsApp: {CONTACT.phone}</span>
-            </a>
+            <ContactPhoneList source="header_mobile" compact />
           </div>
         </div>
       )}

@@ -1,53 +1,57 @@
-import { Mail, MapPin, Phone, MessageCircle } from "lucide-react";
-import { CONTACT, MAP_EMBED_SRC, SITE } from "@/lib/constants";
+import { Mail, MapPin } from "lucide-react";
+import { CONTACT, MAP_SEARCH_URL } from "@/lib/constants";
+import { SectionHeader } from "@/components/common/SectionHeader";
+import { ContactPhoneList } from "@/components/common/ContactPhoneList";
 
 export function ContactMap() {
   return (
-    <section className="bg-white py-14 sm:py-20 border-b border-[#E8E8ED]" aria-label="Office location">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full min-w-0">
-        <div className="grid lg:grid-cols-12 gap-8 items-center mb-8">
-          <div className="lg:col-span-8">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#FCEAF4] text-[#E20A96] text-xs font-bold uppercase tracking-wider mb-2">
-              <MapPin size={13} />
-              <span>{CONTACT.visitLabel}</span>
-            </div>
-            <h3 className="text-xl sm:text-2xl font-bold text-[#292D3D]">
-              Headquartered in {CONTACT.location}
-            </h3>
-            <p className="text-xs sm:text-sm text-[#53596A] mt-1">
-              Delivering world-class digital agency solutions for ambitious businesses across India and worldwide.
-            </p>
-          </div>
-
-          <div className="lg:col-span-4 flex flex-wrap gap-3 lg:justify-end">
+    <section className="section-shell bg-white" aria-label="Contact and location">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="grid items-start gap-10 lg:grid-cols-12">
+          <div className="lg:col-span-5">
+            <SectionHeader
+              align="left"
+              eyebrow={CONTACT.visitLabel}
+              title="Based in"
+              titleHighlight={CONTACT.location}
+              subtitle="We deliver digital products for ambitious businesses across India and worldwide."
+            />
+            <ul className="mt-8 space-y-4 text-sm text-secondary-pit">
+              <li className="flex items-center gap-3">
+                <MapPin size={16} className="text-magenta" />
+                <span>{CONTACT.address}</span>
+              </li>
+              <li>
+                <a href={`mailto:${CONTACT.email}`} className="flex items-center gap-3 hover:text-magenta">
+                  <Mail size={16} className="text-magenta" />
+                  <span>{CONTACT.email}</span>
+                </a>
+              </li>
+            </ul>
             <a
-              href={`https://wa.me/${CONTACT.whatsapp.replace(/[^0-9]/g, "")}`}
+              href={MAP_SEARCH_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-[#E20A96] text-white text-xs font-bold shadow-xs hover:bg-[#C40882] transition-colors"
+              className="btn-outline mt-6 inline-flex items-center gap-2 text-sm"
             >
-              <MessageCircle size={14} />
-              <span>WhatsApp Us</span>
-            </a>
-            <a
-              href={`tel:${CONTACT.phone.replace(/[^0-9+]/g, "")}`}
-              className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full border border-[#E8E8ED] bg-[#F7F7FA] text-[#292D3D] text-xs font-bold hover:border-[#E20A96] hover:text-[#E20A96] transition-colors"
-            >
-              <Phone size={14} />
-              <span>{CONTACT.phone}</span>
+              <MapPin size={14} />
+              <span>Open in Maps</span>
             </a>
           </div>
-        </div>
 
-        <div className="rounded-3xl overflow-hidden border border-[#E8E8ED] bg-white shadow-sm h-[260px] sm:h-[340px] lg:h-[400px]">
-          <iframe
-            title={`${SITE.name} office on Google Maps`}
-            src={MAP_EMBED_SRC}
-            className="w-full h-full border-0"
-            loading="lazy"
-            referrerPolicy="strict-origin-when-cross-origin"
-            allowFullScreen
-          />
+          <div className="lg:col-span-7">
+            <p className="mb-4 text-xs font-semibold uppercase tracking-[0.16em] text-magenta">
+              Call or WhatsApp
+            </p>
+            <ContactPhoneList source="contact_section" />
+            <div className="mt-6 border border-pit bg-pit-grey p-6">
+              <h3 className="text-lg font-extrabold text-navy">Start a conversation</h3>
+              <p className="mt-2 text-sm leading-relaxed text-secondary-pit">
+                Reach either number by WhatsApp or phone — we reply with scope options, timeline
+                guidance, and a clear recommended path.
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </section>

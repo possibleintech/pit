@@ -1,4 +1,4 @@
-import { COMPANY, CODING_PRINCIPLES } from "./site";
+import { COMPANY } from "./site";
 
 export const ABOUT_HERO = {
   eyebrow: "About PIT",
@@ -8,7 +8,7 @@ export const ABOUT_HERO = {
 } as const;
 
 export const ABOUT_STATS = [
-  { value: "10+", label: "Projects Delivered" },
+  { value: "12+", label: "Projects Delivered" },
   { value: "100%", label: "Client Satisfaction" },
   { value: "15+", label: "Technologies" },
   { value: "24/7", label: "Ongoing Reliability" },
@@ -50,5 +50,3 @@ export const ABOUT_EXPERTISE = [
   "WhatsApp Business API & Customer Notifications",
   "DevOps Automation & Quality Engineering",
 ] as const;
-
-export { CODING_PRINCIPLES };

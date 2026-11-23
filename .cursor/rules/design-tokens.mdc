@@ -1,5 +1,5 @@
 ---
-description: Growza brand design tokens — dark/gold luxury aesthetic, no hardcoded colors or fonts
+description: PIT brand design tokens — light magenta agency aesthetic, no hardcoded colors or fonts
 globs: **/*.{tsx,css}
 alwaysApply: false
 ---
@@ -8,23 +8,28 @@ alwaysApply: false
 
 ## Colors
 
-Never hardcode colors in components. Import from `@/lib/constants/colors` or use CSS variables from `globals.css` (`--color-brand-*`).
+Never hardcode colors in components. Import from `@/lib/constants/colors` or use CSS variables / Tailwind theme tokens from `globals.css`.
 
 Approved palette:
-- Background: `#0A0A0A`, `#111111`, `#1A1A1A`
-- Gold: `#D4AF37`; gradient `#FFD700 → #D4AF37 → #B8860B`
-- Text: `#FFFFFF`, `#E5E5E5`
-- Accents: gold highlights only
+- Magenta primary: `#E20A96` (hover `#C40882`)
+- Dark navy: `#292D3D` (light `#373C52`)
+- Soft pink: `#FCEAF4`
+- Background grey: `#F7F7FA`
+- Pure white: `#FFFFFF`
+- Secondary text: `#53596A`
+- Border: `#E8E8ED`
 
-Avoid bright colors, cartoon illustrations, and generic template aesthetics.
+Prefer `text-navy`, `text-magenta`, `bg-pit-grey`, `bg-soft-pink`, `border-pit`, `btn-primary`, `btn-outline`.
+
+Avoid generic template chrome: Sparkles pill badges, card-lift spam, purple/indigo gradients, dark-gold luxury themes.
 
 ## Typography
 
-Never hardcode font families, sizes, or weights. Use `TYPO` / feature constants from `@/lib/constants/typography`. Do not use arbitrary `text-[…]` or inline font styles.
+Never hardcode font families, sizes, or weights. Use `TYPO` / feature constants from `@/lib/constants/typography`. Load fonts via `next/font` — do not inject Google Fonts stylesheets in `<head>`.
 
 ## Styling
 
-- No inline `style={{}}` — use `className` with Tailwind utilities.
+- No inline `style={{}}` — use `className` with Tailwind utilities or shared CSS classes (`pit-grid-bg`, `hero-pattern`).
 - Dynamic visual values → add tokens to `globals.css` `@theme` / `:root`, reference via `var(--…)`.
-- Premium patterns: glassmorphism, gold glow borders, subtle gradients, Framer Motion.
+- Patterns: calm editorial whitespace, navy hierarchy, magenta accents, subtle motion with `prefers-reduced-motion`.
 - Prefer CSS variables + `@theme` over arbitrary Tailwind value classes.

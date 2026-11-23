@@ -1,21 +1,42 @@
 import type { Metadata } from "next";
-import { GOOGLE_FONTS, PUBLIC_ASSETS, SITE } from "@/lib/constants";
+import { Plus_Jakarta_Sans } from "next/font/google";
+import { PUBLIC_ASSETS, SITE } from "@/lib/constants";
 import { Analytics } from "@/components/common/Analytics";
 import { SiteHeaderClient } from "@/components/common/SiteHeaderClient";
 import { SiteFooter } from "@/components/common/SiteFooter";
 import { PitBotChat } from "@/components/pitbot/PitBotChat";
 import { PitBotProvider } from "@/components/pitbot/PitBotController";
 import { HashScroll } from "@/components/common/HashScroll";
+import { WhatsAppFab } from "@/components/common/WhatsAppFab";
+import { JsonLd } from "@/components/common/JsonLd";
+import { organizationJsonLd, websiteJsonLd } from "@/lib/seo/json-ld";
 import "./globals.css";
+
+const plusJakarta = Plus_Jakarta_Sans({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
+  variable: "--font-pit",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.metadataBase),
-  title: SITE.title,
+  title: {
+    default: SITE.title,
+    template: `%s | ${SITE.shortName}`,
+  },
   description: SITE.description,
+  alternates: {
+    canonical: SITE.url,
+  },
   icons: {
-    icon: PUBLIC_ASSETS.favicon,
+    icon: [
+      { url: PUBLIC_ASSETS.favicon, sizes: "any" },
+      { url: PUBLIC_ASSETS.faviconPng, type: "image/png", sizes: "32x32" },
+      { url: PUBLIC_ASSETS.favicon192, type: "image/png", sizes: "192x192" },
+    ],
     shortcut: PUBLIC_ASSETS.favicon,
-    apple: PUBLIC_ASSETS.favicon,
+    apple: PUBLIC_ASSETS.appleTouchIcon,
   },
   openGraph: {
     title: SITE.title,
@@ -40,23 +61,24 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="h-full antialiased" data-scroll-behavior="smooth" suppressHydrationWarning>
-      <head>
-        <link rel="preconnect" href={GOOGLE_FONTS.preconnect} />
-        <link
-          rel="preconnect"
-          href={GOOGLE_FONTS.preconnectStatic}
-          crossOrigin="anonymous"
-        />
-        <link rel="stylesheet" href={GOOGLE_FONTS.stylesheet} />
-      </head>
-      <body className="min-h-full flex flex-col bg-background text-foreground antialiased" suppressHydrationWarning>
+    <html
+      lang="en"
+      className={`h-full antialiased ${plusJakarta.variable}`}
+      data-scroll-behavior="smooth"
+      suppressHydrationWarning
+    >
+      <body
+        className={`${plusJakarta.className} min-h-full flex flex-col bg-background text-foreground antialiased`}
+        suppressHydrationWarning
+      >
+        <JsonLd data={[organizationJsonLd(), websiteJsonLd()]} />
         <PitBotProvider>
           <HashScroll />
           <Analytics />
           <SiteHeaderClient />
           <main className="flex-1 flex flex-col min-w-0 overflow-x-clip">{children}</main>
           <SiteFooter />
+          <WhatsAppFab />
           <PitBotChat />
         </PitBotProvider>
       </body>
