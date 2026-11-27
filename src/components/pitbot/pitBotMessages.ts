@@ -40,6 +40,12 @@ export const PITBOT_SERVICE_GUIDES: Record<
     headline: "Online stores ready to sell from day one.",
     ctaText: "Explore E-commerce",
   },
+  seo: {
+    pose: "search",
+    message: "Let's help your business get discovered on Google!",
+    headline: "Data-driven SEO for top search rankings.",
+    ctaText: "Explore SEO",
+  },
   "search-engine-optimization": {
     pose: "search",
     message: "Let's help your business get discovered on Google!",
@@ -55,7 +61,7 @@ export const PITBOT_SERVICE_GUIDES: Record<
 };
 
 export const PITBOT_CHAT_CONVERSATIONS = {
-  welcome: `Hey! I'm **PIT BOT** 🤖\n\nWelcome to Possible In Tech. What are we building today?`,
+  welcome: `Hi — I'm PIT BOT.\n\nAsk about services, timelines, or book a free consultation. What are you building?`,
   options: [
     {
       id: "web-dev",

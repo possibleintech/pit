@@ -1,6 +1,6 @@
 import { SectionLink as Link } from "@/components/common/SectionLink";
 import Image from "next/image";
-import { Mail, Phone, MapPin, MessageCircle, ArrowRight } from "lucide-react";
+import { Mail, MapPin, ArrowRight } from "lucide-react";
 import {
   SITE,
   CONTACT,
@@ -8,11 +8,11 @@ import {
   PUBLIC_ASSETS,
   FOOTER_SERVICES,
   FOOTER_EXPLORE,
-  FOOTER_COMPANY,
   FOOTER_MOBILE_QUICK,
 } from "@/lib/constants";
 import { SocialIcons } from "@/components/common/SocialIcons";
 import { FooterMobileSection } from "@/components/common/FooterMobileSection";
+import { ContactPhoneList } from "@/components/common/ContactPhoneList";
 
 function FooterColumn({
   title,
@@ -83,32 +83,17 @@ export function SiteFooter() {
         <div className="lg:hidden w-full">
           <FooterBrand />
 
-          <div className="mt-6 pt-6 border-t border-[#E8E8ED] space-y-2.5 text-xs text-[#53596A]">
-            <a
-              href={`https://wa.me/${CONTACT.whatsapp.replace(/[^0-9]/g, "")}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 hover:text-[#E20A96] transition-colors"
-            >
-              <MessageCircle size={15} className="text-[#E20A96] shrink-0" />
-              <span>WhatsApp: {CONTACT.phone}</span>
-            </a>
-            <a
-              href={`tel:${CONTACT.secondaryPhone.replace(/[^0-9+]/g, "")}`}
-              className="flex items-center gap-2 hover:text-[#E20A96] transition-colors"
-            >
-              <Phone size={15} className="text-[#E20A96] shrink-0" />
-              <span>Call: {CONTACT.secondaryPhone}</span>
-            </a>
+          <div className="mt-6 space-y-3 border-t border-[#E8E8ED] pt-6 text-xs text-[#53596A]">
+            <ContactPhoneList source="footer_mobile" compact />
             <div className="flex items-center gap-2">
-              <MapPin size={15} className="text-[#E20A96] shrink-0" />
+              <MapPin size={15} className="shrink-0 text-magenta" />
               <span>{CONTACT.location}</span>
             </div>
             <a
               href={`mailto:${CONTACT.email}`}
-              className="flex items-center gap-2 hover:text-[#E20A96] transition-colors"
+              className="flex items-center gap-2 transition-colors hover:text-magenta"
             >
-              <Mail size={15} className="text-[#E20A96] shrink-0" />
+              <Mail size={15} className="shrink-0 text-magenta" />
               <span>{CONTACT.email}</span>
             </a>
           </div>
@@ -151,35 +136,20 @@ export function SiteFooter() {
           </div>
 
           <div className="lg:col-span-3">
-            <h3 className="text-xs font-bold uppercase tracking-wider text-[#292D3D] mb-4">
+            <h3 className="mb-4 text-xs font-bold uppercase tracking-wider text-navy">
               Contact & WhatsApp
             </h3>
-            <div className="space-y-3 text-xs text-[#53596A]">
-              <a
-                href={`https://wa.me/${CONTACT.whatsapp.replace(/[^0-9]/g, "")}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2 text-[#292D3D] hover:text-[#E20A96] transition-colors font-semibold"
-              >
-                <MessageCircle size={15} className="text-[#E20A96] shrink-0" />
-                <span>{CONTACT.phone} (WhatsApp)</span>
-              </a>
-              <a
-                href={`tel:${CONTACT.secondaryPhone.replace(/[^0-9+]/g, "")}`}
-                className="flex items-center gap-2 hover:text-[#E20A96] transition-colors"
-              >
-                <Phone size={15} className="text-[#E20A96] shrink-0" />
-                <span>{CONTACT.secondaryPhone} (Call)</span>
-              </a>
+            <div className="space-y-3 text-xs text-secondary-pit">
+              <ContactPhoneList source="footer_desktop" compact />
               <div className="flex items-center gap-2">
-                <MapPin size={15} className="text-[#E20A96] shrink-0" />
+                <MapPin size={15} className="shrink-0 text-magenta" />
                 <span>{CONTACT.location}</span>
               </div>
               <a
                 href={`mailto:${CONTACT.email}`}
-                className="flex items-center gap-2 hover:text-[#E20A96] transition-colors"
+                className="flex items-center gap-2 transition-colors hover:text-magenta"
               >
-                <Mail size={15} className="text-[#E20A96] shrink-0" />
+                <Mail size={15} className="shrink-0 text-magenta" />
                 <span>{CONTACT.email}</span>
               </a>
             </div>

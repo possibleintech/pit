@@ -1,4 +1,5 @@
 import { SERVICE_METHODOLOGY } from "./service-methodology";
+import { ROUTES } from "./routes";
 
 export const SERVICES_HERO = {
   eyebrow: "Our Capabilities",
@@ -212,7 +213,9 @@ export const HOME_SERVICES = SERVICES_LIST.map((s) => ({
   headline: s.headline,
   description: s.description,
   image: s.image,
-  href: `/services#${s.id}`,
+  href: `${ROUTES.services}#${s.id}`,
   techTags: s.techTags,
   isCore: s.isCore,
 }));
+
+export const HOME_FEATURED_SERVICES = HOME_SERVICES.filter((s) => s.isCore).slice(0, 4);

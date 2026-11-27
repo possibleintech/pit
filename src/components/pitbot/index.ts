@@ -7,7 +7,6 @@ export {
   usePitBot,
 } from "./PitBotController";
 export {
-  PitBotHeroShowcase,
   PitBotServicesInteractiveGuide,
   PitBotFormCelebration,
 } from "./PitBotInteractions";
